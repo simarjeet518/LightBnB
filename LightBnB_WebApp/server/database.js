@@ -117,6 +117,12 @@ exports.getAllReservations = getAllReservations;
      queryString += `WHERE city LIKE $${queryParams.length} `;
    }
 
+   if (options.owner_id) {
+    const ownerId = Number(options.owner_id);
+    queryParams.push(ownerId);
+    queryString += `AND properties.owner_id = $${queryParams.length} `;
+  }
+
    if (options.minimum_price_per_night) {
     const price = Number(options.minimum_price_per_night );
     queryParams.push(price*100);
